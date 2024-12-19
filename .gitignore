@@ -1,0 +1,7 @@
+# Secrets
+.env
+
+# Auto-generated files
+__pycache__/
+.ipynb_checkpoints/
+.vscode/

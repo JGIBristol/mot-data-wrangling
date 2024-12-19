@@ -1,0 +1,48 @@
+{
+    "bulk": [
+        {
+            "filename": "v1/public/bulk/year=2024/month=7/day=1/bulk-light-vehicle_01-07-2024.zip",
+            "downloadUrl": "https://aws.example.com/...",
+            "fileSize": 37718225291,
+            "fileCreatedOn": "2024-07-01"
+        }
+    ],
+    "delta": [
+        {
+            "filename": "v1/public/delta/year=2024/month=7/day=1/delta-light-vehicle_01-07-2024.zip",
+            "downloadUrl": "https://aws.example.com/...",
+            "fileSize": 95757600,
+            "fileCreatedOn": "2024-07-01"
+        },
+        {
+            "filename": "v1/public/delta/year=2024/month=7/day=2/delta-light-vehicle_02-07-2024.zip",
+            "downloadUrl": "https://aws.example.com/...",
+            "fileSize": 71552302,
+            "fileCreatedOn": "2024-07-02"
+        },
+        {
+            "filename": "v1/public/delta/year=2024/month=7/day=3/delta-light-vehicle_03-07-2024.zip",
+            "downloadUrl": "https://aws.example.com/...",
+            "fileSize": 80061429,
+            "fileCreatedOn": "2024-07-03"
+        },
+        {
+            "filename": "v1/public/delta/year=2024/month=7/day=4/delta-light-vehicle_04-07-2024.zip",
+            "downloadUrl": "https://aws.example.com/...",
+            "fileSize": 72306711,
+            "fileCreatedOn": "2024-07-04"
+        },
+        {
+            "filename": "v1/public/delta/year=2024/month=7/day=5/delta-light-vehicle_05-07-2024.zip",
+            "downloadUrl": "https://aws.example.com/...",
+            "fileSize": 71595592,
+            "fileCreatedOn": "2024-07-05"
+        },
+        {
+            "filename": "v1/public/delta/year=2024/month=7/day=6/delta-light-vehicle_06-07-2024.zip",
+            "downloadUrl": "https://aws.example.com/...",
+            "fileSize": 3855982,
+            "fileCreatedOn": "2024-07-06"
+        }
+    ]
+}
