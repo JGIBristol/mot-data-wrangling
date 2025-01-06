@@ -47,7 +47,7 @@ def convert_zip_to_parquet(
         zipfile.ZipFile(zip_file_path, "r") as zip_file,
         tempfile.TemporaryDirectory(prefix=".tmp-", dir=parquet_dir_path.parent) as temp_dir,
     ):
-        temp_dir = Path(temp_dir)
+        temp_path = Path(temp_dir)
 
         # We are only interested in bulk gzip files and not delta gzip files that will also be
         # present in the zip archive
@@ -57,20 +57,20 @@ def convert_zip_to_parquet(
 
         # We save parquet data into the temporary directory and only move it when everything else is
         # successful
-        temp_parquet_dir = temp_dir / "output.parquet.d"
+        temp_parquet_dir = temp_path / "output.parquet.d"
         temp_parquet_dir.mkdir()
 
         # Extract, import, remove for each batch of gzip files
         batched_gzip_files = list(batched(gzip_files, batch_size))
         filename_padding = len(str(len(batched_gzip_files)))
         for batch_no, batch_files in enumerate(track(batched_gzip_files, console=console)):
-            zip_file.extractall(path=temp_dir, members=batch_files)
+            zip_file.extractall(path=temp_path, members=batch_files)
             conn.execute(f"""
-                COPY (SELECT * FROM read_json('{temp_dir / "*.json.gz"}'))
+                COPY (SELECT * FROM read_json('{temp_path / "*.json.gz"}'))
                 TO '{temp_parquet_dir / f"bulk_{batch_no:0{filename_padding}}.parquet"}';
             """)
             for batch_file in batch_files:
-                (temp_dir / batch_file).unlink()
+                (temp_path / batch_file).unlink()
 
         shutil.rmtree(parquet_dir_path, ignore_errors=True)
         temp_parquet_dir.rename(parquet_dir_path)

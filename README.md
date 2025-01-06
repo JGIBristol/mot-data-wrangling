@@ -36,6 +36,19 @@ Python code for the command line interface (CLI) is stored inside [`src/mot_data
 Each command (for example, [`dvsa-mot-history-api`](./src/mot_data/dvsa_mot_history_api)) is stored in its own directory, with the entry points to the CLI defined in `cli.py`.
 The commands are registered as scripts inside [`pyproject.toml`](./pyproject.toml), which causes `uv` to make them runnable at the command line.
 
+Testing, type checking, linting and formatting of source code are performed using `pytest`, `mypy` and `ruff`.
+You can run all of these automatically using:
+
+```bash
+uv run just all
+```
+
+or to list the individual commands:
+
+```bash
+uv run just
+```
+
 ## License
 
 MIT License
