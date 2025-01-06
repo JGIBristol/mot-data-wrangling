@@ -1,8 +1,5 @@
 # MOT Data Wrangling
 
-[James Thomas](https://github.com/jatonline)\
-December 2024
-
 A collection of tools to work with MOT data from various of sources.
 
 ## Overview
@@ -49,6 +46,18 @@ or to list the individual commands:
 uv run just
 ```
 
+## Contributors
+
+- [James Thomas](https://github.com/jatonline), Jean Golding Institute, University of Bristol
+
+## Acknowledgements
+
+This software has been developed as part of the [CARS Project](https://cars-project.github.io/), a collaboration between [University of Leeds](https://www.leeds.ac.uk/) and [University of Bristol](https://www.bristol.ac.uk/) and funded by [ADR UK](https://www.adruk.org/).
+
+This software uses the DVSA MOT History API, however it is neither affialiated with nor endorsed by the DVSA or Department for Transport.
+
+Supported by the [Jean Golding Institute](https://www.bristol.ac.uk/golding/).
+
 ## License
 
-MIT License
+The source code in this repository is licensed under the MIT License.
