@@ -1,3 +1,10 @@
+"""Convert a zip archive from the DVSA MOT History API to a directory of
+Parquet files.
+
+The main work is done in the convert_zip_to_parquet function. See its docstring
+for more information.
+"""
+
 import fnmatch
 import shutil
 import tempfile

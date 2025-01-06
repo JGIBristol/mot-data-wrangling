@@ -1,7 +1,7 @@
 [project]
 name = "mot-data"
 version = "0.1.0"
-description = "Assorted analysis of MOT data from various sources"
+description = "A collection of tools to work with MOT data from various of sources."
 readme = "README.md"
 authors = [
     { name = "James Thomas", email = "j.thomas@bristol.ac.uk" }

@@ -1,3 +1,9 @@
+"""Allow authenticated access to the MOT History API provided by the DVSA.
+
+The main work is done in the APIClient class. See its docstring for more
+information.
+"""
+
 import itertools
 import urllib
 from pathlib import Path
@@ -116,7 +122,7 @@ class APIClient:
         destination_dir = Path(destination_dir)
         bulk_urls = self.get_bulk_urls()
         downloaded_files = [
-            download_file(
+            _download_file(
                 url=bulk_file["downloadUrl"],
                 destination=destination_dir / Path(bulk_file["filename"]).name,
                 expected_size=bulk_file["fileSize"],
@@ -126,7 +132,7 @@ class APIClient:
         return downloaded_files
 
 
-def download_file(url: str, destination: Path | str, expected_size: int | None = None) -> Path:
+def _download_file(url: str, destination: Path | str, expected_size: int | None = None) -> Path:
     """Download a file from a URL to a destination path, skipping if the
     file already exists, or resuming if the file is incomplete.
 

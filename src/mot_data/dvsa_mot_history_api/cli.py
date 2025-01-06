@@ -1,3 +1,6 @@
+"""A command line interface providing access to the DVSA MOT History API client
+and associated functions."""
+
 import click
 
 from .. import console, paths
