@@ -6,9 +6,16 @@ import requests
 from environs import Env
 from oauthlib.oauth2 import BackendApplicationClient
 from requests_oauthlib import OAuth2Session
-from rich.progress import BarColumn, DownloadColumn, Progress, TextColumn, TimeRemainingColumn, TransferSpeedColumn
+from rich.progress import (
+    BarColumn,
+    DownloadColumn,
+    Progress,
+    TextColumn,
+    TimeRemainingColumn,
+    TransferSpeedColumn,
+)
 
-from . import console, paths
+from .. import console, paths
 
 PROGRESSBAR_COLUMNS = [
     TextColumn("[progress.description]{task.description}"),
@@ -43,19 +50,21 @@ class APIClient:
 
     def _ensure_authenticated(self) -> None:
         if getattr(self, "session", None) is None:
-            self.session = OAuth2Session(client=BackendApplicationClient(client_id=self.env("CLIENT_ID")))
-            self.session.fetch_token(
-                token_url=self.env("TOKEN_URL"),
-                client_secret=self.env("CLIENT_SECRET"),
-                scope=self.env("SCOPE_URL"),
+            self.session = OAuth2Session(
+                client=BackendApplicationClient(client_id=self.env("DVSA_CLIENT_ID"))
             )
-            self.session.headers.update({"X-Api-Key": self.env("API_KEY")})
+            self.session.fetch_token(
+                token_url=self.env("DVSA_TOKEN_URL"),
+                client_secret=self.env("DVSA_CLIENT_SECRET"),
+                scope=self.env("DVSA_SCOPE_URL"),
+            )
+            self.session.headers.update({"X-Api-Key": self.env("DVSA_API_KEY")})
 
     def _get(self, endpoint_url: str) -> dict:
         self._ensure_authenticated()
         response = self.session.get(
             urllib.parse.urljoin(
-                self.env("API_URL"),
+                self.env("DVSA_API_URL"),
                 endpoint_url,
             )
         )
@@ -139,7 +148,9 @@ def download_file(url: str, destination: Path | str, expected_size: int | None =
         and destination.is_file()
         and (expected_size is None or destination.stat().st_size == expected_size)
     ):
-        console.print(f"File {destination.name} already exists. Skipping download.", highlight=False)
+        console.print(
+            f"File {destination.name} already exists. Skipping download.", highlight=False
+        )
         return destination
 
     # We need to be able to resume large downloads if they get interrupted
@@ -156,7 +167,9 @@ def download_file(url: str, destination: Path | str, expected_size: int | None =
         # Stream the content into the destination file with a nice progress bar
         with destination.open("ab") as f:
             with Progress(*PROGRESSBAR_COLUMNS, console=console) as progress:
-                task = progress.add_task(f"Downloading {destination.name}", total=total_size, completed=initial_size)
+                task = progress.add_task(
+                    f"Downloading {destination.name}", total=total_size, completed=initial_size
+                )
                 for chunk in request.iter_content(chunk_size=8192):
                     if chunk:
                         f.write(chunk)

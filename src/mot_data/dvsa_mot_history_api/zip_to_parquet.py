@@ -8,7 +8,7 @@ from pathlib import Path
 import duckdb
 from rich.progress import track
 
-from . import console
+from .. import console
 
 conn = duckdb.connect()
 conn.execute("SET enable_progress_bar = false")
@@ -19,7 +19,8 @@ def convert_zip_to_parquet(
     parquet_dir_path: str | Path,
     batch_size: int = 10,
 ) -> None:
-    """Convert a zip archive from the DVSA API to a directory of Parquet files.
+    """Convert a zip archive from the DVSA MOT History API to a directory of
+    Parquet files.
 
     The zip file should contain bulk data as gzipped JSON files. The gzip files
     will be extracted from the zip file to a temporary directory in batches (to

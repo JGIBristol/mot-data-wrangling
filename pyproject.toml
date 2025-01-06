@@ -1,7 +1,7 @@
 [project]
-name = "mot-history"
+name = "mot-data"
 version = "0.1.0"
-description = "Add your description here"
+description = "Assorted analysis of MOT data from various sources"
 readme = "README.md"
 authors = [
     { name = "James Thomas", email = "j.thomas@bristol.ac.uk" }
@@ -18,15 +18,9 @@ dependencies = [
     "rich>=13.9.4",
 ]
 
-[project.scripts]
-mot_history = "mot_history.cli:cli"
-
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
-
-[tool.ruff]
-line-length = 100
 
 [dependency-groups]
 dev = [
@@ -37,3 +31,9 @@ dev = [
     "types-requests>=2.32.0.20241016",
     "types-requests-oauthlib>=2.0.0.20240417",
 ]
+
+[project.scripts]
+dvsa-mot-history-api = "mot_data.dvsa_mot_history_api.cli:cli"
+
+[tool.ruff]
+line-length = 100
